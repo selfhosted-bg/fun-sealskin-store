@@ -1,0 +1,16 @@
+apps:
+- id: "homm3"
+  name: "Heroes of Might and Magic III (GOG)"
+  logo: "https://raw.githubusercontent.com/selfhosted-bg/docker-homm3-gog/refs/heads/main/img/homm3_hd.png"
+  url: "https://github.com/selfhosted-bg/docker-homm3-gog"
+  provider: "docker"
+  provider_config:
+    image: "kuhaleyka/homm3-gog-cpmplete-hd:latest"
+    port: 3000
+    nvidia_support: true
+    dri3_support: true
+    type: "app"
+    autostart: true
+    url_support: false
+    open_support: false
+    extensions: []

@@ -1,1 +1,2 @@
-# fun-sealskin-store
+# A Fun SealSkin Application Store
+
