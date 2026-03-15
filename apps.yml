@@ -15,9 +15,5 @@ apps:
     open_support: false
     extensions: []
     docker_overrides:
-      environment:
-        SELKIES_MANUAL_WIDTH: "1920"
-        SELKIES_MANUAL_HEIGHT: "1080"
-        MAX_RESOLUTION: "1920x1080"
-        SELKIES_ENCODER: "x264enc-striped"
-        SELKIES_USE_BROWSER_CURSORS: "true"
+      # We don't use 'environment' here so we don't wipe SUBFOLDER/PASSWORD
+      entrypoint: ["/bin/bash", "-c", "export SELKIES_MANUAL_WIDTH=1920 SELKIES_MANUAL_HEIGHT=1080 SELKIES_IS_MANUAL_RESOLUTION_MODE=true MAX_RESOLUTION=1920x1080 SELKIES_ENCODER=x264enc-striped; exec /init"]
