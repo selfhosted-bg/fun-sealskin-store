@@ -15,6 +15,7 @@ apps:
     open_support: false
     extensions: []
     docker_overrides:
+      shm_size: "1g"
       environment:
         - "SELKIES_IS_MANUAL_RESOLUTION_MODE=true"
         - "SELKIES_MANUAL_WIDTH=1920"
