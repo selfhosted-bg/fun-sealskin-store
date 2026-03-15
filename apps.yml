@@ -14,3 +14,12 @@ apps:
     url_support: false
     open_support: false
     extensions: []
+    docker_overrides:
+      environment:
+        - SELKIES_MANUAL_WIDTH: 1920
+        - SELKIES_MANUAL_HEIGHT: 1080
+        - MAX_RESOLUTION: 1920x1080
+        - RESTART_APP: true
+        - SELKIES_ENCODER: x264enc-striped
+        - SELKIES_FRAMERATE: 30
+        - SELKIES_USE_BROWSER_CURSORS: true
