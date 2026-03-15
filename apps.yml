@@ -14,12 +14,3 @@ apps:
     url_support: false
     open_support: false
     extensions: []
-    docker_overrides:
-      shm_size: "1g"
-      environment:
-        - "SELKIES_IS_MANUAL_RESOLUTION_MODE=true"
-        - "SELKIES_MANUAL_WIDTH=1920"
-        - "SELKIES_MANUAL_HEIGHT=1080"
-        - "MAX_RESOLUTION=1920x1080"
-        - "SELKIES_ENCODER=x264enc-striped"
-        - "SELKIES_USE_BROWSER_CURSORS=true"
