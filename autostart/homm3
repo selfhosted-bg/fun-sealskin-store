@@ -1,2 +1,14 @@
+# store save games to persistant storage
+if [[ ! -d "${HOME}/HoMM 3 Complete/Games" ]]; then
+  mkdir -p "${HOME}/HoMM 3 Complete/Games"
+fi
+
+if [[ -d "/opt/games/HoMM 3 Complete/Games" ]]; then
+  mv "/opt/games/HoMM 3 Complete/Games/*" "${HOME}/HoMM 3 Complete/Games"
+  rm -rf "/opt/games/HoMM 3 Complete/Games"
+  ln -s "${HOME}/HoMM 3 Complete/Games" "/opt/games/HoMM 3 Complete/Games"
+fi
+
+# set background
 feh --bg-fill /usr/share/backgrounds/bg_default.png
 /usr/bin/heroes3hd_launcher ${SEALSKIN_FILE:+"$SEALSKIN_FILE"} ${SEALSKIN_URL:+"$SEALSKIN_URL"}
