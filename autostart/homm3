@@ -1,14 +1,42 @@
-# store save games to persistant storage
-if [[ ! -d "${HOME}/HoMM 3 Complete/Games" ]]; then
-  mkdir -p "${HOME}/HoMM 3 Complete/Games"
-fi
+#!/usr/bin/env bash
 
-if [[ -d "/opt/games/HoMM 3 Complete/Games" ]]; then
-  mv "/opt/games/HoMM 3 Complete/Games/*" "${HOME}/HoMM 3 Complete/Games"
-  rm -rf "/opt/games/HoMM 3 Complete/Games"
-  ln -s "${HOME}/HoMM 3 Complete/Games" "/opt/games/HoMM 3 Complete/Games"
-fi
-
-# set background
+# Set background
 feh --bg-fill /usr/share/backgrounds/bg_default.png
-/usr/bin/heroes3hd_launcher ${SEALSKIN_FILE:+"$SEALSKIN_FILE"} ${SEALSKIN_URL:+"$SEALSKIN_URL"}
+
+# Check if installation is complete
+if [ ! -f "/config/.homm3/.patches_applied" ]; then
+    # First run or incomplete installation
+    /opt/startup/install_homm3_runtime.sh
+
+    if [ $? -ne 0 ]; then
+        # Installation failed - show error and exit
+        zenity --error \
+            --title="Installation Failed" \
+            --text="HoMM3 installation encountered an error.\n\nCheck /config/.homm3/.installation.log for details.\n\nContainer will exit. Please review logs and restart." \
+            --width=400 2>/dev/null
+        exit 1
+    fi
+fi
+
+# Ensure saves directory exists in persistent storage
+mkdir -p "/config/HoMM 3 Complete/Games"
+
+# Create symlink to save games if it doesn't exist
+if [ ! -L "/config/HoMM 3 Complete/Games" ]; then
+    # If there's an old Games directory (shouldn't happen in runtime install, but just in case)
+    if [ -d "/config/HoMM 3 Complete/Games" ] && [ ! -L "/config/HoMM 3 Complete/Games" ]; then
+        # Directory exists and is not a symlink - it's already in the right place, nothing to do
+        :
+    fi
+fi
+
+# Launch game
+export WINEPREFIX=/config/.wine
+export HOME=/config
+cd "/config/HoMM 3 Complete"
+wineserver -k
+notify-send -t 10000 'Loading Heroes 3 HD Launcher...'
+echo "Starting Heroes 3"
+wine HD_Launcher.exe
+notify-send -t 5000 'Launcher will reload, standby!'
+wineserver --wait

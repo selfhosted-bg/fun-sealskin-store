@@ -5,7 +5,7 @@ apps:
   url: "https://github.com/selfhosted-bg/docker-homm3-gog"
   provider: "docker"
   provider_config:
-    image: "kuhaleyka/homm3-gog-cpmplete-hd:latest"
+    image: "ghcr.io/selfhosted-bg/docker-homm3-gog:latest"
     port: 3000
     nvidia_support: true
     dri3_support: true
